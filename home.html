@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header{
+            display : flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #89d882;
+            color: white;
+            position: relative;
+            border-bottom: 1px solid #ccc;
+
+        }
+        .head-left{
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position:relative;
+        }
+        .head-right{
+            display:flex;
+            padding: 10px 20px;
+            justify-content: space-between;
+            align-items: center;
+
+
+        }
+        img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+        #dashboard{
+            color: white;
+            border: 1px solid white;
+            background-color: #e83a3a;
+
+
+        }
+        #sm{
+            color: white;
+
+        }
+        #asses{
+            color: white;
+
+        }
+        #profile{
+            color: white;
+
+        }
+        #attendance{
+            color: white;
+
+        }
+        
+
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div class="head-left">
+            <i class="fa-solid fa-list menu-icon" id="menuToggle"></i>
+            <div class="menu-dropdown" id="menuDropdown">
+                <div id = "dashboard">
+                     <button></button><a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></button>
+                </div>
+                <div id = "sm">
+                     <button ></button><a href="studymaterials.html"><i class="fa-solid fa-book"></i> Study Materials</a></button>
+                </div>
+                <div id = "asses">
+                     <button ></button><a href="viewassessment.html"><i class="fa-solid fa-clipboard-check"></i> View Assessment</a></button>
+                </div>
+                <div id = "profile">
+                     <button ></button><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></button>
+                </div>
+                <div id = "attendance">
+                     <button ></button><a href="viewattendance.html"><i class="fa-solid fa-calendar-check"></i> View Attendance</a></button>
+                </div>
+            </div>
+        </div>
+        <div class="head-right">
+            <img src="./photo.jpeg" alt="profile pic" id="profilepic">
+            <p>RANGU RAHUL</p>
+            <i class="fa fa-chevron-down" data-bs-toggle="tooltip" title="" data-bs-original-title="fa fa-chevron-down" aria-label="fa fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const menuDropdown = document.getElementById('menuDropdown');
+
+        // Toggle menu on click
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            menuDropdown.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function() {
+            menuDropdown.classList.remove('show');
+        });
+
+        // Prevent menu from closing when clicking inside dropdown
+        menuDropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // Handle menu item clicks (optional - for navigation)
+        const menuItems = document.querySelectorAll('.menu-dropdown button');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                console.log('Clicked:', this.textContent.trim());
+                // Add your navigation logic here
+                menuDropdown.classList.remove('show');
+            });
+        });
+    </script> -->
+</body>
+</html>
