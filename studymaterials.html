@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Study Materials</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        *{
-            margin:0;
+        * {
+            margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        header{
-            display : flex;
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
@@ -20,102 +26,464 @@
             color: white;
             position: relative;
             border-bottom: 1px solid #ccc;
-
         }
-        .head-left{
+
+        .head-left {
             display: flex;
             align-items: center;
             gap: 15px;
-            position:relative;
+            position: relative;
         }
-        .head-right{
-            display:flex;
-            padding: 10px 20px;
-            justify-content: space-between;
+
+        .head-right {
+            display: flex;
             align-items: center;
-
-
+            gap: 10px;
+            position: relative;
         }
-        img{
+
+        .menu-icon {
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .menu-icon:hover {
+            color: #333;
+        }
+
+        .menu-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+            min-width: 220px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .head-left:hover .menu-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .menu-dropdown div {
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .menu-dropdown div:last-child {
+            border-bottom: none;
+        }
+
+        .menu-dropdown div a {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.15s ease-in-out;
+        }
+
+        .menu-dropdown div a:hover {
+            background-color: #f8f9fa;
+            color: #0066cc;
+        }
+
+        .menu-dropdown div a i {
+            margin-right: 0.5rem;
+            width: 16px;
+        }
+
+        #sm {
+            background-color: #e83a3a;
+        }
+
+        #sm a {
+            color: white !important;
+        }
+
+        #sm a:hover {
+            background-color: #dc2626 !important;
+            color: white !important;
+        }
+
+        img {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
-            margin-right: 10px;
         }
-        #dashboard{
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+            min-width: 150px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .profile-section:hover .profile-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-dropdown a {
+            display: block;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.15s ease-in-out;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: #f8f9fa;
+            color: #dc2626;
+        }
+
+        .profile-dropdown a i {
+            margin-right: 0.5rem;
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .materials-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+
+        .materials-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .material-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        .material-item:hover {
+            border-color: #89d882;
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .pdf-icon {
+            font-size: 2rem;
+            color: #dc3545;
+            margin-right: 1rem;
+        }
+
+        .course-info {
+            flex-grow: 1;
+        }
+
+        .course-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #89d882, #6bc76b);
             color: white;
-
-        }
-        #sm{
-            color: white;
-
-        }
-        #asses{
-            color: white;
-
-        }
-        #profile{
-            color: white;
-
-        }
-        #attendance{
-            color: white;
-
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
+        .download-btn:hover {
+            background: linear-gradient(135deg, #6bc76b, #59b559);
+            transform: scale(1.05);
+        }
 
-        
+        /* Course Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .course-details h3 {
+            color: #89d882;
+            margin-bottom: 1rem;
+        }
+
+        .course-details p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .material-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .pdf-icon {
+                margin-bottom: 1rem;
+                margin-right: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="head-left">
-            <i class="fa-solid fa-list menu-icon" id="menuToggle"></i>
-            <div class="menu-dropdown" id="menuDropdown">
-                <button id="dashboard"></button><a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></button>
-                <button id="sm"></button><a href="studymaterials.html"><i class="fa-solid fa-book"></i> Study Materials</a></button>
-                <button id="asses"></button><a href="viewassessment.html"><i class="fa-solid fa-clipboard-check"></i> View Assessment</a></button>
-                <button id="profile"></button><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></button>
-                <button id="attendance"></button><a href="viewattendance.html"><i class="fa-solid fa-calendar-check"></i> View Attendance</a></button>
+            <i class="fa-solid fa-list menu-icon"></i>
+            <div class="menu-dropdown">
+                <div id="dashboard">
+                    <a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                </div>
+                <div id="sm">
+                    <a href="studymaterials.html"><i class="fa-solid fa-book"></i> Study Materials</a>
+                </div>
+                <div id="asses">
+                    <a href="viewassessment.html"><i class="fa-solid fa-clipboard-check"></i> View Assessment</a>
+                </div>
+                <div id="profile">
+                    <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+                </div>
+                <div id="attendance">
+                    <a href="viewattendance.html"><i class="fa-solid fa-calendar-check"></i> View Attendance</a>
+                </div>
             </div>
         </div>
+        
         <div class="head-right">
-            <img src="./photo.jpeg" alt="profile pic" id="profilepic">
-            <p>RANGU RAHUL</p>
-            <i class="fa fa-chevron-down" data-bs-toggle="tooltip" title="" data-bs-original-title="fa fa-chevron-down" aria-label="fa fa-chevron-down"></i>
+            <div class="profile-section">
+                <img src="./photo.jpeg" alt="profile pic" id="profilepic">
+                <p>RANGU RAHUL</p>
+                <i class="fa fa-chevron-down"></i>
+                
+                <div class="profile-dropdown">
+                    <a href="login.html"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const menuDropdown = document.getElementById('menuDropdown');
+    <main>
+        <h2 style="margin-bottom: 2rem; color: #333;">Study Materials</h2>
+        
+        <div class="materials-container">
+            <ul class="materials-list">
+                <li class="material-item" onclick="openCourseInfo('python')">
+                    <i class="fas fa-file-pdf pdf-icon"></i>
+                    <div class="course-info">
+                        <div class="course-title">Python Programming Course</div>
+                        <div class="course-description">Complete Python guide from basics to advanced concepts</div>
+                    </div>
+                    <button class="download-btn" onclick="event.stopPropagation(); downloadPDF('python')">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </li>
 
-        // Toggle menu on click
-        menuToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            menuDropdown.classList.toggle('show');
-        });
+                <li class="material-item" onclick="openCourseInfo('java')">
+                    <i class="fas fa-file-pdf pdf-icon"></i>
+                    <div class="course-info">
+                        <div class="course-title">Java Programming Course</div>
+                        <div class="course-description">Object-oriented programming with Java fundamentals</div>
+                    </div>
+                    <button class="download-btn" onclick="event.stopPropagation(); downloadPDF('java')">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </li>
 
-        // Close menu when clicking outside
-        document.addEventListener('click', function() {
-            menuDropdown.classList.remove('show');
-        });
+                <li class="material-item" onclick="openCourseInfo('cpp')">
+                    <i class="fas fa-file-pdf pdf-icon"></i>
+                    <div class="course-info">
+                        <div class="course-title">C++ Programming Course</div>
+                        <div class="course-description">Advanced C++ concepts and system programming</div>
+                    </div>
+                    <button class="download-btn" onclick="event.stopPropagation(); downloadPDF('cpp')">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </li>
 
-        // Prevent menu from closing when clicking inside dropdown
-        menuDropdown.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
+                <li class="material-item" onclick="openCourseInfo('javascript')">
+                    <i class="fas fa-file-pdf pdf-icon"></i>
+                    <div class="course-info">
+                        <div class="course-title">JavaScript Course</div>
+                        <div class="course-description">Modern JavaScript for web development</div>
+                    </div>
+                    <button class="download-btn" onclick="event.stopPropagation(); downloadPDF('javascript')">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </li>
 
-        // Handle menu item clicks (optional - for navigation)
-        const menuItems = document.querySelectorAll('.menu-dropdown button');
-        menuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                console.log('Clicked:', this.textContent.trim());
-                // Add your navigation logic here
-                menuDropdown.classList.remove('show');
-            });
-        });
-    </script> -->
+                <li class="material-item" onclick="openCourseInfo('php')">
+                    <i class="fas fa-file-pdf pdf-icon"></i>
+                    <div class="course-info">
+                        <div class="course-title">PHP Web Development Course</div>
+                        <div class="course-description">Server-side programming with PHP and MySQL</div>
+                    </div>
+                    <button class="download-btn" onclick="event.stopPropagation(); downloadPDF('php')">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Course Info Modal -->
+    <div id="courseModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="courseDetails" class="course-details">
+                <!-- Course information will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openCourseInfo(course) {
+            const modal = document.getElementById('courseModal');
+            const courseDetails = document.getElementById('courseDetails');
+            
+            const courseInfo = {
+                python: {
+                    title: 'Python Programming Course',
+                    description: 'Learn Python from scratch with hands-on examples and projects.',
+                    duration: '8 weeks',
+                    level: 'Beginner to Advanced',
+                    topics: ['Variables and Data Types', 'Control Structures', 'Functions', 'OOP', 'Libraries', 'Web Development']
+                },
+                java: {
+                    title: 'Java Programming Course',
+                    description: 'Master Java programming with object-oriented concepts.',
+                    duration: '10 weeks',
+                    level: 'Intermediate',
+                    topics: ['Java Basics', 'OOP Concepts', 'Collections', 'Exception Handling', 'Multithreading', 'Spring Framework']
+                },
+                cpp: {
+                    title: 'C++ Programming Course',
+                    description: 'Advanced C++ programming for system-level development.',
+                    duration: '12 weeks',
+                    level: 'Advanced',
+                    topics: ['Pointers and Memory', 'STL', 'Templates', 'Design Patterns', 'System Programming']
+                },
+                javascript: {
+                    title: 'JavaScript Course',
+                    description: 'Modern JavaScript for frontend and backend development.',
+                    duration: '6 weeks',
+                    level: 'Beginner to Intermediate',
+                    topics: ['ES6+ Features', 'DOM Manipulation', 'Async Programming', 'Node.js', 'React Basics']
+                },
+                php: {
+                    title: 'PHP Web Development Course',
+                    description: 'Server-side programming with PHP and database integration.',
+                    duration: '8 weeks',
+                    level: 'Intermediate',
+                    topics: ['PHP Syntax', 'MySQL Integration', 'Session Management', 'Security', 'Laravel Framework']
+                }
+            };
+
+            const info = courseInfo[course];
+            courseDetails.innerHTML = `
+                <h3>${info.title}</h3>
+                <p><strong>Description:</strong> ${info.description}</p>
+                <p><strong>Duration:</strong> ${info.duration}</p>
+                <p><strong>Level:</strong> ${info.level}</p>
+                <p><strong>Topics Covered:</strong></p>
+                <ul>
+                    ${info.topics.map(topic => `<li>${topic}</li>`).join('')}
+                </ul>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('courseModal').style.display = 'none';
+        }
+
+        function downloadPDF(course) {
+            alert(`Downloading ${course.toUpperCase()} course PDF...`);
+            // Here you would implement actual PDF download functionality
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('courseModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>

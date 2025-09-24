@@ -3,16 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>View Assessment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        *{
-            margin:0;
+        * {
+            margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        header{
-            display : flex;
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
@@ -20,102 +26,281 @@
             color: white;
             position: relative;
             border-bottom: 1px solid #ccc;
-
         }
-        .head-left{
+
+        .head-left {
             display: flex;
             align-items: center;
             gap: 15px;
-            position:relative;
+            position: relative;
         }
-        .head-right{
-            display:flex;
-            padding: 10px 20px;
-            justify-content: space-between;
+
+        .head-right {
+            display: flex;
             align-items: center;
-
-
+            gap: 10px;
+            position: relative;
         }
-        img{
+
+        .menu-icon {
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .menu-icon:hover {
+            color: #333;
+        }
+
+        .menu-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+            min-width: 220px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .head-left:hover .menu-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .menu-dropdown div {
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .menu-dropdown div:last-child {
+            border-bottom: none;
+        }
+
+        .menu-dropdown div a {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.15s ease-in-out;
+        }
+
+        .menu-dropdown div a:hover {
+            background-color: #f8f9fa;
+            color: #0066cc;
+        }
+
+        .menu-dropdown div a i {
+            margin-right: 0.5rem;
+            width: 16px;
+        }
+
+        #asses {
+            background-color: #e83a3a;
+        }
+
+        #asses a {
+            color: white !important;
+        }
+
+        #asses a:hover {
+            background-color: #dc2626 !important;
+            color: white !important;
+        }
+
+        img {
             width: 40px;
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
-            margin-right: 10px;
         }
-        #dashboard{
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+            min-width: 150px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .profile-section:hover .profile-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-dropdown a {
+            display: block;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.15s ease-in-out;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: #f8f9fa;
+            color: #dc2626;
+        }
+
+        .profile-dropdown a i {
+            margin-right: 0.5rem;
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+
+        .no-assessment-container {
+            text-align: center;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .no-assessment-icon {
+            font-size: 4rem;
+            color: #ccc;
+            margin-bottom: 1.5rem;
+        }
+
+        .no-assessment-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .no-assessment-message {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .check-back-btn {
+            background: linear-gradient(135deg, #89d882, #6bc76b);
             color: white;
-
-        }
-        #sm{
-            color: white;
-
-        }
-        #asses{
-            color: white;
-
-        }
-        #profile{
-            color: white;
-
-        }
-        #attendance{
-            color: white;
-
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
+        .check-back-btn:hover {
+            background: linear-gradient(135deg, #6bc76b, #59b559);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
 
-        
+        /* Hide empty buttons */
+        .menu-dropdown button {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            main {
+                padding: 1rem;
+            }
+
+            .no-assessment-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .no-assessment-icon {
+                font-size: 3rem;
+            }
+
+            .no-assessment-title {
+                font-size: 1.3rem;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="head-left">
-            <i class="fa-solid fa-list menu-icon" id="menuToggle"></i>
-            <div class="menu-dropdown" id="menuDropdown">
-                <button id="dashboard"></button><a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></button>
-                <button id="sm"></button><a href="studymaterials.html"><i class="fa-solid fa-book"></i> Study Materials</a></button>
-                <button id="asses"></button><a href="viewassessment.html"><i class="fa-solid fa-clipboard-check"></i> View Assessment</a></button>
-                <button id="profile"></button><a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a></button>
-                <button id="attendance"></button><a href="viewattendance.html"><i class="fa-solid fa-calendar-check"></i> View Attendance</a></button>
+            <i class="fa-solid fa-list menu-icon"></i>
+            <div class="menu-dropdown">
+                <div id="dashboard">
+                    <a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                </div>
+                <div id="sm">
+                    <a href="studymaterials.html"><i class="fa-solid fa-book"></i> Study Materials</a>
+                </div>
+                <div id="asses">
+                    <a href="viewassessment.html"><i class="fa-solid fa-clipboard-check"></i> View Assessment</a>
+                </div>
+                <div id="profile">
+                    <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+                </div>
+                <div id="attendance">
+                    <a href="viewattendance.html"><i class="fa-solid fa-calendar-check"></i> View Attendance</a>
+                </div>
             </div>
         </div>
+        
         <div class="head-right">
-            <img src="./photo.jpeg" alt="profile pic" id="profilepic">
-            <p>RANGU RAHUL</p>
-            <i class="fa fa-chevron-down" data-bs-toggle="tooltip" title="" data-bs-original-title="fa fa-chevron-down" aria-label="fa fa-chevron-down"></i>
+            <div class="profile-section">
+                <img src="./photo.jpeg" alt="profile pic" id="profilepic">
+                <p>RANGU RAHUL</p>
+                <i class="fa fa-chevron-down"></i>
+                
+                <div class="profile-dropdown">
+                    <a href="login.html"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
         </div>
     </header>
 
-    <!-- <script>
-        const menuToggle = document.getElementById('menuToggle');
-        const menuDropdown = document.getElementById('menuDropdown');
-
-        // Toggle menu on click
-        menuToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            menuDropdown.classList.toggle('show');
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function() {
-            menuDropdown.classList.remove('show');
-        });
-
-        // Prevent menu from closing when clicking inside dropdown
-        menuDropdown.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-
-        // Handle menu item clicks (optional - for navigation)
-        const menuItems = document.querySelectorAll('.menu-dropdown button');
-        menuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                console.log('Clicked:', this.textContent.trim());
-                // Add your navigation logic here
-                menuDropdown.classList.remove('show');
-            });
-        });
-    </script> -->
+    <main>
+        <div class="no-assessment-container">
+            <i class="fas fa-clipboard-list no-assessment-icon"></i>
+            <h2 class="no-assessment-title">No Assessments Available</h2>
+            <p class="no-assessment-message">
+                There are currently no assessments available for you to take. 
+                New assessments will be posted here when they become available.
+            </p>
+            <button class="check-back-btn" onclick="location.reload()">
+                <i class="fas fa-sync-alt"></i> Check Again
+            </button>
+        </div>
+    </main>
 </body>
 </html>
