@@ -230,6 +230,76 @@
             transform: translateY(-2px);
         }
 
+        /* AI Chatbot Styles */
+        .ai-chatbot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        .ai-chatbot:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .ai-chatbot i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .ai-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: #333;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .ai-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            border: 5px solid transparent;
+            border-top-color: #333;
+        }
+
+        .ai-chatbot:hover .ai-tooltip {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            }
+            50% {
+                box-shadow: 0 4px 20px rgba(102, 126, 234, 0.6);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            }
+        }
+
         /* Hide broken button elements */
         .menu-dropdown button {
             display: none;
@@ -244,6 +314,17 @@
             
             main {
                 padding: 1rem;
+            }
+
+            .ai-chatbot {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .ai-chatbot i {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -318,5 +399,19 @@
             </div>
         </div>
     </main>
+
+    <!-- AI Chatbot -->
+    <div class="ai-chatbot" onclick="initializeAIChatbot()">
+        <i class="fas fa-robot"></i>
+        <div class="ai-tooltip">AI Assistant</div>
+    </div>
+
+    <script>
+        function initializeAIChatbot() {
+            alert("AI Chatbot initializing...\nHello! I'm your AI assistant. How can I help you today?");
+            // Here you can add actual chatbot functionality
+            console.log("AI Chatbot initialized");
+        }
+    </script>
 </body>
 </html>

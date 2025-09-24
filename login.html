@@ -130,6 +130,7 @@
         }
 
         button[type="submit"]:hover {
+            background: linear-gradient(135deg, #6bc76b, #59b559);
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
@@ -177,7 +178,7 @@
     </header>
     
     <main>
-        <form id="loginForm">
+        <form id="loginForm" onsubmit="handleLogin(event)">
             <h2>Login</h2>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" placeholder="Enter your username" required>
@@ -192,5 +193,25 @@
     <footer>
         <p>&copy; 2024 LMS PORTAL. All rights reserved.</p>
     </footer>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation (you can add more sophisticated validation)
+            if (username && password) {
+                // Simulate login process
+                alert('Login successful! Redirecting to dashboard...');
+                
+                // Redirect to dashboard after successful login
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+    </script>
 </body>
 </html>

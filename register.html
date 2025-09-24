@@ -133,6 +133,7 @@
         }
 
         button[type="submit"]:hover {
+            background: linear-gradient(135deg, #6bc76b, #59b559);
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
@@ -180,7 +181,7 @@
     </header>
     
     <main>
-        <form id="registerForm">
+        <form id="registerForm" onsubmit="handleRegister(event)">
             <h2>Register</h2>
             <label for="firstname">First Name:</label>
             <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
@@ -201,5 +202,27 @@
     <footer>
         <p>&copy; 2024 LMS PORTAL. All rights reserved.</p>
     </footer>
+
+    <script>
+        function handleRegister(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            const firstname = document.getElementById('firstname').value;
+            const lastname = document.getElementById('lastname').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation
+            if (firstname && lastname && email && password) {
+                // Simulate registration process
+                alert('Registration successful! Redirecting to dashboard...');
+                
+                // Redirect to dashboard after successful registration
+                window.location.href = 'login.html';
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+    </script>
 </body>
 </html>
