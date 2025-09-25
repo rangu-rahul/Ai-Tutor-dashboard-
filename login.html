@@ -196,17 +196,13 @@
 
     <script>
         function handleLogin(event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault(); 
             
             const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // Simple validation (you can add more sophisticated validation)
+            const password = document.getElementById('password').va
             if (username && password) {
-                // Simulate login process
                 alert('Login successful! Redirecting to dashboard...');
-                
-                // Redirect to dashboard after successful login
+            
                 window.location.href = 'dashboard.html';
             } else {
                 alert('Please fill in all fields');
