@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #2c5aa0;
+            color: white;
+            position: relative;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .head-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+
+        .head-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+
+        .menu-icon {
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.2s ease;
+        }
+
+        .menu-icon:hover {
+            color: #87ceeb;
+        }
+
+        .menu-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+            min-width: 280px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .head-left:hover .menu-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .menu-dropdown div {
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .menu-dropdown div:last-child {
+            border-bottom: none;
+        }
+
+        .menu-dropdown div a {
+            display: block;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.15s ease-in-out;
+        }
+
+        .menu-dropdown div a:hover {
+            background-color: #f8f9fa;
+            color: #2c5aa0;
+        }
+
+        .menu-dropdown div a i {
+            margin-right: 0.5rem;
+            width: 16px;
+        }
+
+        #faculty-dashboard {
+            background-color: #e83a3a;
+        }
+
+        #faculty-dashboard a {
+            color: white !important;
+        }
+
+        #faculty-dashboard a:hover {
+            background-color: #dc2626 !important;
+            color: white !important;
+        }
+
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+            min-width: 150px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .profile-section:hover .profile-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .profile-dropdown a {
+            display: block;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.15s ease-in-out;
+        }
+
+        .profile-dropdown a:hover {
+            background-color: #f8f9fa;
+            color: #dc2626;
+        }
+
+        main {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #2c5aa0, #87ceeb);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .faculty-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tool-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            color: #2c5aa0;
+            margin-bottom: 1rem;
+        }
+
+        .tool-card h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .tool-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .tool-card button {
+            background: linear-gradient(135deg, #2c5aa0, #87ceeb);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .tool-card button:hover {
+            background: linear-gradient(135deg, #1e3d6f, #5f9ea0);
+            transform: translateY(-2px);
+        }
+
+        /* AI Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #2c5aa0, #87ceeb);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(44, 90, 160, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbot-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(44, 90, 160, 0.4);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #2c5aa0, #87ceeb);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-bubble {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .message.bot .message-bubble {
+            background: #f1f3f4;
+            color: #333;
+        }
+
+        .message.user .message-bubble {
+            background: linear-gradient(135deg, #2c5aa0, #87ceeb);
+            color: white;
+        }
+
+        .message-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .message.bot .message-avatar {
+            background: linear-gradient(135deg, #2c5aa0, #87ceeb);
+            color: white;
+        }
+
+        .message.user .message-avatar {
+            background: #f1f3f4;
+            color: #333;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #e1e5e9;
+            gap: 0.5rem;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #e1e5e9;
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .chatbot-input input:focus {
+            border-color: #2c5aa0;
+        }
+
+        .chatbot-send {
+            background: linear-gradient(135deg, #2c5aa0, #87ceeb);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .chatbot-send:hover {
+            background: linear-gradient(135deg, #1e3d6f, #5f9ea0);
+        }
+
+        @media (max-width: 768px) {
+            .faculty-tools-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+
+            .chatbot-window {
+                width: 300px;
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chatbot-window {
+                width: 280px;
+                right: -10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="head-left">
+            <i class="fa-solid fa-list menu-icon"></i>
+            <div class="menu-dropdown">
+                <div id="faculty-dashboard">
+                    <a href="facultydashboard.html"><i class="fa-solid fa-chart-line"></i> Faculty Dashboard</a>
+                </div>
+                <div>
+                    <a href="uploadmateriales.html"><i class="fa-solid fa-upload"></i> Upload Study Materials</a>
+                </div>
+                <div>
+                    <a href="manageattendencepage.html"><i class="fa-solid fa-calendar-check"></i> Manage Attendance</a>
+                </div>
+                <div>
+                    <a href="#" onclick="alert('Create Assessment feature coming soon!')"><i class="fa-solid fa-clipboard-list"></i> Create Assessment</a>
+                </div>
+                <div>
+                    <a href="#" onclick="alert('View Students feature coming soon!')"><i class="fa-solid fa-users"></i> View Students</a>
+                </div>
+                <div>
+                    <a href="#" onclick="alert('Group Link Message feature coming soon!')"><i class="fa-solid fa-link"></i> Group Link Message</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="head-right">
+            <div class="profile-section">
+                <img src="./photo.jpeg" alt="faculty pic">
+                <p>RAHUL</p>
+                <i class="fa fa-chevron-down"></i>
+                
+                <div class="profile-dropdown">
+                    <a href="faculty-login.html"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="welcome-section">
+            <h1>Welcome to Faculty Dashboard</h1>
+            <p>Manage your courses, students, and academic materials</p>
+        </div>
+
+        <div class="faculty-tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <h3>Upload Study Materials</h3>
+                <p>Upload PDFs, documents, and course materials for students</p>
+                <button onclick="window.location.href='uploadmateriales.html'">Upload Materials</button>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <h3>Manage Attendance</h3>
+                <p>Take attendance, view reports, and track student participation</p>
+                <button onclick="window.location.href='manageattendencepage.html'">Manage Attendance</button>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <h3>Create Assessment</h3>
+                <p>Create quizzes, exams, and assignments for students</p>
+                <button onclick="alert('Create Assessment feature coming soon!')">Create Assessment</button>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>View Students</h3>
+                <p>View enrolled students, their progress, and performance</p>
+                <button onclick="alert('View Students feature coming soon!')">View Students</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- AI Chatbot -->
+    <div class="chatbot-container">
+        <button class="chatbot-toggle" onclick="toggleChatbot()">
+            <i class="fas fa-robot" id="chatbot-icon"></i>
+        </button>
+        
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <h4><i class="fas fa-robot"></i> AI Assistant</h4>
+                <button class="chatbot-close" onclick="toggleChatbot()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message bot">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-bubble">
+                        Hello! I'm your AI assistant. How can I help you with your faculty tasks today?
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <input type="text" id="user-input" placeholder="Type your message..." onkeypress="handleEnter(event)">
+                <button class="chatbot-send" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let chatbotOpen = false;
+
+        function toggleChatbot() {
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const chatbotIcon = document.getElementById('chatbot-icon');
+            
+            if (chatbotOpen) {
+                chatbotWindow.style.display = 'none';
+                chatbotIcon.className = 'fas fa-robot';
+                chatbotOpen = false;
+            } else {
+                chatbotWindow.style.display = 'flex';
+                chatbotIcon.className = 'fas fa-times';
+                chatbotOpen = true;
+            }
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const message = userInput.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                userInput.value = '';
+                
+                // Simulate AI response
+                setTimeout(() => {
+                    const response = getAIResponse(message);
+                    addMessage(response, 'bot');
+                }, 1000);
+            }
+        }
+
+        function addMessage(message, sender) {
+            const messagesContainer = document.getElementById('chatbot-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.innerHTML = sender === 'bot' ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user"></i>';
+            
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble';
+            bubble.textContent = message;
+            
+            messageDiv.appendChild(avatar);
+            messageDiv.appendChild(bubble);
+            messagesContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function getAIResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('attendance')) {
+                return "I can help you with attendance management! You can take attendance, view reports, and track student participation through the Manage Attendance section.";
+            } else if (lowerMessage.includes('upload') || lowerMessage.includes('material')) {
+                return "To upload study materials, click on the 'Upload Study Materials' card. You can upload PDFs, documents, and course materials for your students.";
+            } else if (lowerMessage.includes('student')) {
+                return "You can view enrolled students, their progress, and performance through the student management features. Would you like to know more about any specific student management task?";
+            } else if (lowerMessage.includes('assessment') || lowerMessage.includes('quiz') || lowerMessage.includes('exam')) {
+                return "The assessment creation feature is coming soon! It will allow you to create quizzes, exams, and assignments for your students.";
+            } else if (lowerMessage.includes('help')) {
+                return "I'm here to help! You can ask me about attendance management, uploading materials, student management, or any other faculty dashboard features.";
+            } else {
+                return "I understand you're asking about faculty tasks. I can help with attendance, material uploads, student management, and assessments. What would you like to know more about?";
+            }
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>
