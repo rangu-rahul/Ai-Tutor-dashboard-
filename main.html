@@ -263,11 +263,11 @@
 
     <script>
         function redirectToStudentLogin() {
-            window.location.href = 'login.html';
+            window.location.href = 'student-register.html';
         }
 
         function redirectToFacultyLogin() {
-            window.location.href = 'faculty-login.html';
+            window.location.href = 'faculty-register.html';
         }
 
         // Add smooth hover effects
@@ -280,9 +280,7 @@
                 this.style.transform = 'translateY(0)';
             });
         });
-
-        // Add click animation
-        document.querySelectorAll('.login-card').forEach(card => {
+                document.querySelectorAll('.login-card').forEach(card => {
             card.addEventListener('click', function() {
                 this.style.transform = 'scale(0.95)';
                 setTimeout(() => {
