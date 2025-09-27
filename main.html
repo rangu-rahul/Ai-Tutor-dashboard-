@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMS Portal - Main Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background-color: rgba(52, 23, 23, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(44, 29, 29, 0.2);
+        }
+
+        header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .login-options-container {
+            display: flex;
+            gap: 3rem;
+            max-width: 900px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-card {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .login-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-icon {
+            margin-bottom: 1.5rem;
+        }
+
+        .login-icon i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .student-card .login-icon i {
+            color: #667eea;
+        }
+
+        .faculty-card .login-icon i {
+            color: #764ba2;
+        }
+
+        .login-card h2 {
+            color: #333;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .login-card p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.875rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            color: white;
+        }
+
+        .student-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .faculty-btn {
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .features-list {
+            list-style: none;
+            text-align: left;
+            margin: 1.5rem 0;
+        }
+
+        .features-list li {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .features-list li i {
+            color: #28a745;
+            font-size: 0.8rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        footer p {
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .login-options-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .login-card {
+                max-width: 100%;
+                padding: 2rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 1rem;
+            }
+
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .login-card {
+                padding: 1.5rem;
+            }
+
+            .login-icon i {
+                font-size: 3rem !important;
+            }
+
+            .login-card h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-graduation-cap"></i> LMS PORTAL</h1>
+    </header>
+    
+    <main>
+        <div class="login-options-container">
+            <!-- Student Login Card -->
+            <div class="login-card student-card" onclick="redirectToStudentLogin()">
+                <div class="login-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h2>Student Portal</h2>
+                <p>Access your courses, assignments, grades, and study materials</p>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> View Course Materials</li>
+                    <li><i class="fas fa-check-circle"></i> Submit Assignments</li>
+                    <li><i class="fas fa-check-circle"></i> Track Attendance</li>
+                    <li><i class="fas fa-check-circle"></i> Check Grades</li>
+                    <li><i class="fas fa-check-circle"></i> AI Tutor Chat</li>
+                </ul>
+                
+                <button class="login-btn student-btn" onclick="redirectToStudentLogin()">
+                    <i class="fas fa-sign-in-alt"></i> Login as Student
+                </button>
+            </div>
+
+            <!-- Faculty Login Card -->
+            <div class="login-card faculty-card" onclick="redirectToFacultyLogin()">
+                <div class="login-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h2>Faculty Portal</h2>
+                <p>Manage courses, students, assessments, and academic materials</p>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-check-circle"></i> Upload Study Materials</li>
+                    <li><i class="fas fa-check-circle"></i> Manage Attendance</li>
+                    <li><i class="fas fa-check-circle"></i> Create Assessments</li>
+                    <li><i class="fas fa-check-circle"></i> View Student Progress</li>
+                    <li><i class="fas fa-check-circle"></i> AI Assistant</li>
+                </ul>
+                
+                <button class="login-btn faculty-btn" onclick="redirectToFacultyLogin()">
+                    <i class="fas fa-sign-in-alt"></i> Login as Faculty
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LMS PORTAL. All rights reserved. | Empowering Education Through Technology</p>
+    </footer>
+
+    <script>
+        function redirectToStudentLogin() {
+            window.location.href = 'login.html';
+        }
+
+        function redirectToFacultyLogin() {
+            window.location.href = 'faculty-login.html';
+        }
+
+        // Add smooth hover effects
+        document.querySelectorAll('.login-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Add click animation
+        document.querySelectorAll('.login-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-10px)';
+                }, 100);
+            });
+        });
+
+        // Prevent button clicks from triggering card clicks
+        document.querySelectorAll('.login-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>

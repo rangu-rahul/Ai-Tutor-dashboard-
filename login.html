@@ -1,213 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+// ...existing code...
+<script>
+    function handleLogin(event) {
+        event.preventDefault();
+        
+        const studentId = document.getElementById('studentId').value;
+        const password = document.getElementById('password').value;
+        
+        // Basic validation
+        if (!studentId || !password) {
+            alert('Please fill in all fields');
+            return;
         }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #c5cadf 0%, #c4b4d3 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+        
+        // Simple validation - direct redirect to student dashboard
+        if (studentId.toLowerCase() === 'student123' && password === 'password') {
+            alert('Student login successful! Redirecting to dashboard...');
+            // Direct redirect to student dashboard
+            window.location.href = 'home.html';
+        } else {
+            alert('Invalid Student ID or Password. Please try again.\n\nDemo credentials:\nStudent ID: student123\nPassword: password');
         }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background-color: rgba(52, 23, 23, 0.1);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(44, 29, 29, 0.2);
-        }
-
-        header h1 {
-            color: white;
-            font-size: 1.8rem;
-            font-weight: bold;
-        }
-
-        .header-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .header-buttons a {
-            padding: 0.5rem 1rem;
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 0.375rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .header-buttons a:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        main {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
-
-        #loginForm {
-            background: white;
-            padding: 3rem 2.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        #loginForm h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #333;
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            margin-bottom: 1.5rem;
-            border: 2px solid #e1e5e9;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-            background-color: #f8f9fa;
-            color: #333;
-        }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus {
-            outline: none;
-            border-color: #667eea;
-            background-color: white;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        input[type="text"]::placeholder,
-        input[type="password"]::placeholder {
-            color: #6c757d;
-        }
-
-        button[type="submit"] {
-            width: 100%;
-            padding: 0.875rem;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        button[type="submit"]:hover {
-            background: linear-gradient(135deg, #6bc76b, #59b559);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            margin-top: 2rem;
-        }
-
-        footer p {
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive design */
-        @media (max-width: 480px) {
-            header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            #loginForm {
-                padding: 2rem 1.5rem;
-                margin: 1rem;
-            }
-
-            header h1 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>LMS PORTAL</h1>
-        <div class="header-buttons">
-            <a href="register.html">Register</a>
-            <a href="login.html">Login</a>
-        </div>
-    </header>
-    
-    <main>
-        <form id="loginForm" onsubmit="handleLogin(event)">
-            <h2>Login</h2>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" placeholder="Enter your username" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            
-            <button type="submit">Login</button>
-        </form>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 LMS PORTAL. All rights reserved.</p>
-    </footer>
-
-    <script>
-        function handleLogin(event) {
-            event.preventDefault(); 
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').va
-            if (username && password) {
-                alert('Login successful! Redirecting to dashboard...');
-            
-                window.location.href = 'dashboard.html';
-            } else {
-                alert('Please fill in all fields');
-            }
-        }
-    </script>
-</body>
-</html>
+    }
+</script>

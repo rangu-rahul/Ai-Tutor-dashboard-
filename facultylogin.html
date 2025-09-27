@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: rgba(52, 23, 23, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(44, 29, 29, 0.2);
+        }
+
+        header h1 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .header-buttons a {
+            padding: 0.5rem 1rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.375rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header-buttons a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .header-buttons a.active {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        #facultyLoginForm {
+            background: white;
+            padding: 3rem 2.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #facultyLoginForm h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .faculty-icon {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .faculty-icon i {
+            font-size: 3rem;
+            color: #764ba2;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: #764ba2;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(118, 75, 162, 0.3);
+        }
+
+        .login-links {
+            text-align: center;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .login-links a {
+            color: #764ba2;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .login-links a:hover {
+            text-decoration: underline;
+            color: #667eea;
+        }
+
+        .back-to-main {
+            background-color: rgba(118, 75, 162, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid rgba(118, 75, 162, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        footer p {
+            color: white;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fas fa-graduation-cap"></i> LMS PORTAL - FACULTY</h1>
+        <div class="header-buttons">
+            <a href="main.html">Home</a>
+            <a href="login.html">Student Login</a>
+            <a href="faculty-login.html" class="active">Faculty Login</a>
+        </div>
+    </header>
+    
+    <main>
+        <form id="facultyLoginForm" onsubmit="handleFacultyLogin(event)">
+            <div class="faculty-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <h2>Faculty Login</h2>
+            
+            <label for="facultyId">Faculty ID:</label>
+            <input type="text" id="facultyId" name="facultyId" placeholder="Enter your Faculty ID" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            
+            <button type="submit">
+                <i class="fas fa-sign-in-alt"></i> Login as Faculty
+            </button>
+            
+            <div class="login-links">
+                <a href="login.html">Login as Student instead</a>
+                <a href="main.html" class="back-to-main">
+                    <i class="fas fa-arrow-left"></i> Back to Main Page
+                </a>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LMS PORTAL. All rights reserved. | Empowering Education Through Technology</p>
+    </footer>
+
+    <script>
+        function handleFacultyLogin(event) {
+            event.preventDefault();
+            
+            const facultyId = document.getElementById('facultyId').value;
+            const password = document.getElementById('password').value;
+            
+            // Basic validation
+            if (!facultyId || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Simple validation - direct redirect to faculty dashboard
+            if (facultyId.toLowerCase() === 'faculty123' && password === 'password') {
+                alert('Faculty login successful! Redirecting to faculty dashboard...');
+                // Direct redirect without delay
+                window.location.href = 'facultydashboard.html';
+            } else {
+                alert('Invalid Faculty ID or Password. Please try again.\n\nDemo credentials:\nFaculty ID: faculty123\nPassword: password');
+            }
+        }
+    </script>
+</body>
+</html>
